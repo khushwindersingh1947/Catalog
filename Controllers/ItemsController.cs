@@ -9,19 +9,30 @@ namespace Catalog.Controllers
     [Route("[controller]")]
     public class ItemsController:ControllerBase
     {
-        private readonly InMemItems repository;
+        private readonly IInMemItems _repository;
 
-        public ItemsController()
+        public ItemsController(IInMemItems repository)
         {
-            repository = new InMemItems();
+            _repository = repository;
         }
 
         // Get /items
         [HttpGet]
         public IEnumerable<Item> GetItems()
         {
-            var items = repository.GetItems();
+            var items = _repository.GetItems();
             return items;
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Item> GetItem(Guid id)
+        {
+            var item = _repository.GetItem(id);
+            if(item is not null)
+            {
+                return item;
+            }
+            return NotFound();
         }
     }
 }

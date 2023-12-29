@@ -2,7 +2,7 @@ using Catalog.Models;
 
 namespace Catalog.Repositories
 {
-    public class InMemItems
+    public class InMemItems : IInMemItems
     {
         private readonly List<Item> items = new List<Item>()
         {
@@ -21,8 +21,5 @@ namespace Catalog.Repositories
         {
             return items.FirstOrDefault(a=>a.Id == id);
         }
-
-        
-
     }
 }
