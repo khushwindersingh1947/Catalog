@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-01-17T03:35:31Z"
+  generateName: catalog-deployment-694dd95cff-
+  labels:
+    app: catalog
+    pod-template-hash: 694dd95cff
+  name: catalog-deployment-694dd95cff-78f7g
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: catalog-deployment-694dd95cff
+    uid: 0f9006d3-de29-4094-a90a-dd24a8949e0a
+  resourceVersion: "14422"
+  uid: 5939261f-5e6a-41e1-96a0-a2471136e720
+spec:
+  containers:
+  - env:
+    - name: MongoDbSettings__Host
+      value: mongodb-service
+    - name: MongoDbSettings__Password
+      valueFrom:
+        secretKeyRef:
+          key: mongodb-password
+          name: catalog-secret
+    image: catalog:v2
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health/live
+        port: 80
+        scheme: HTTP
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: catalog
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health/ready
+        port: 80
+        scheme: HTTP
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+      requests:
+        cpu: 500m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-f7k57
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: docker-desktop
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-f7k57
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-01-17T03:35:31Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-01-17T03:35:31Z"
+    message: 'containers with unready status: [catalog]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-01-17T03:35:31Z"
+    message: 'containers with unready status: [catalog]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-01-17T03:35:31Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://2858817a432ec248d7abb6751ebd27ae269c49b28bfb48ec4e1ee7c4220211ff
+    image: catalog:v2
+    imageID: docker://sha256:96267bc863af0da7de7debec4f5f21aa476c24402e944e74f7e54dacf2b0c05b
+    lastState: {}
+    name: catalog
+    ready: false
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-01-17T03:35:31Z"
+  hostIP: 192.168.65.3
+  phase: Running
+  podIP: 10.1.0.28
+  podIPs:
+  - ip: 10.1.0.28
+  qosClass: Guaranteed
+  startTime: "2024-01-17T03:35:31Z"
