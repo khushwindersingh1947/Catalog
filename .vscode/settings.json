@@ -1,0 +1,5 @@
+{
+    "dotnet.server.useOmnisharp": true,
+    "omnisharp.autoStart": false,
+    "dotnet-test-explorer.testProjectPath": "**/*Tests.csproj"
+}
