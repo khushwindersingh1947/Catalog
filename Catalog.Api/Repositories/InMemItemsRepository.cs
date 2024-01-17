@@ -1,6 +1,6 @@
-using Catalog.Models;
+using Catalog.Api.Models;
 
-namespace Catalog.Repositories
+namespace Catalog.Api.Repositories
 {
     public class InMemItemsRepository : IItemsRepository
     {

@@ -1,4 +1,4 @@
-namespace Catalog.Dtos
+namespace Catalog.Api.Dtos
 {
     //Data transfer Object
     //this will not expose our Item Model

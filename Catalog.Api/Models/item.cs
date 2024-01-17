@@ -1,4 +1,4 @@
-namespace Catalog.Models
+namespace Catalog.Api.Models
 {
     //immutable, can use == operator and also "with" expression
     public record Item

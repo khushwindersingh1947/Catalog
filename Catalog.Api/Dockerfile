@@ -7,18 +7,18 @@ ENV ASPNETCORE_URLS=http://+:80
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["Catalog.csproj", "./"]
-RUN dotnet restore "Catalog.csproj"
+COPY ["Catalog.Api.csproj", "./"]
+RUN dotnet restore "Catalog.Api.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "Catalog.csproj" -c $configuration -o /app/build
+RUN dotnet build "Catalog.Api.csproj" -c $configuration -o /app/build
 
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "Catalog.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Catalog.Api.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Catalog.dll"]
+ENTRYPOINT ["dotnet", "Catalog.Api.dll"]

@@ -1,9 +1,9 @@
 using System.Runtime.CompilerServices;
-using Catalog.Models;
+using Catalog.Api.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Catalog.Repositories
+namespace Catalog.Api.Repositories
 {
     public class MongoDbItemsRepository : IItemsRepository
     {

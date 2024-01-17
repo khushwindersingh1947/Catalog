@@ -1,8 +1,8 @@
 using System.Net.Mime;
 using System.Text.Json;
-using Catalog.Controllers;
-using Catalog.Repositories;
-using Catalog.Settings;
+using Catalog.Api.Controllers;
+using Catalog.Api.Repositories;
+using Catalog.Api.Settings;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
